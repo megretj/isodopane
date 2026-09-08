@@ -174,6 +174,8 @@ annoying.)
 
 ## Data sources and attribution
 
+[isochrone.ch](https://isochrone.ch) inspired this project.
+
 Attribution for the fare-zone data is mandatory and is shown in the site footer.
 
 | Data | Source | Terms |
