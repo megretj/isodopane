@@ -1,0 +1,83 @@
+# ZVV single-ticket prices (Einzelbillette), adult, in CHF.
+#
+# Transcribed by hand from zvv.ch -> Abos und Tickets -> Einzelbillette.
+# "reduced" = children 6-15.99 and Halbtax holders.
+#
+# RE-VERIFY AND RE-DATE BEFORE SHIPPING: ZVV revises fares at the December
+# timetable change. Never edit these numbers to make a `validate` fixture pass —
+# a mismatch is a bug in the graph or zone assignment.
+
+valid_from = "2025-12-14"
+source = "https://www.zvv.ch/zvv/de/abos-und-tickets/tickets/einzelbillette.html"
+
+[[stufen]]
+stufe = 1
+label = "Lokalnetz"
+validity_minutes = 30
+second = 2.80
+first = 4.60
+reduced_second = 2.40
+reduced_first = 4.00
+
+[[stufen]]
+stufe = 2
+label = "1-2 Zonen"
+validity_minutes = 60
+second = 4.70
+first = 7.80
+reduced_second = 3.30
+reduced_first = 5.40
+
+[[stufen]]
+stufe = 3
+label = "3 Zonen"
+validity_minutes = 60
+second = 7.20
+first = 11.80
+reduced_second = 3.60
+reduced_first = 5.90
+
+[[stufen]]
+stufe = 4
+label = "4 Zonen"
+validity_minutes = 120
+second = 9.40
+first = 15.60
+reduced_second = 4.70
+reduced_first = 7.80
+
+[[stufen]]
+stufe = 5
+label = "5 Zonen"
+validity_minutes = 120
+second = 11.40
+first = 18.80
+reduced_second = 5.70
+reduced_first = 9.40
+
+[[stufen]]
+stufe = 6
+label = "6 Zonen"
+validity_minutes = 120
+second = 13.60
+first = 22.40
+reduced_second = 6.80
+reduced_first = 11.20
+
+[[stufen]]
+stufe = 7
+label = "7 Zonen"
+validity_minutes = 120
+second = 15.80
+first = 26.00
+reduced_second = 7.90
+reduced_first = 13.00
+
+[[stufen]]
+stufe = 8
+label = "Alle Zonen"
+validity_minutes = 120
+second = 18.00
+first = 29.80
+reduced_second = 9.00
+reduced_first = 14.90

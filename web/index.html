@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isodapane — Zürich by the franc</title>
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="map"></div>
+
+<aside id="panel">
+  <header>
+    <h1>Isodapane</h1>
+    <p class="sub">An isochrone map measures minutes. This one measures francs:
+       where a single ZVV ticket takes you.
+       <a href="national.html">Switzerland-wide map →</a></p>
+  </header>
+
+  <section class="origin">
+    <div class="label">Starting from</div>
+    <div id="origin-name">—</div>
+    <div class="meta"><span id="origin-zone"></span> · search <span id="timing">—</span></div>
+    <div class="hint">Click anywhere on the map to move the starting point. It snaps
+      to the nearest stop, because fares are computed over the stop network.</div>
+  </section>
+
+  <section class="control">
+    <label for="budget">Budget <output id="budget-value">CHF 10.00</output></label>
+    <input type="range" id="budget" min="0" max="20" step="0.1" value="10">
+    <div class="range-note"><span id="budget-max">max —</span> — the priciest place
+      reachable from here</div>
+  </section>
+
+  <section class="control toggles">
+    <div class="toggle">
+      <span class="label">Class</span>
+      <label><input type="radio" name="klass" value="second" checked> 2nd</label>
+      <label><input type="radio" name="klass" value="first"> 1st</label>
+    </div>
+    <div class="toggle">
+      <span class="label">Fare</span>
+      <label><input type="radio" name="reduction" value="full" checked> Full</label>
+      <label><input type="radio" name="reduction" value="reduced"> Reduced</label>
+    </div>
+  </section>
+
+  <section class="legend">
+    <div class="label">Single ticket, by zones billed</div>
+    <div id="legend-items"></div>
+  </section>
+
+  <details class="caveats">
+    <summary>What this is, and what it isn't</summary>
+    <p>Each zone is shaded by the cheapest single ticket that reaches any stop
+       inside it, using the ZVV zone tariff. Zones 110 (Zürich) and 120
+       (Winterthur) each count as two, as the tariff requires. A ticket must
+       cover every zone your vehicle passes through, so a non-stop express is
+       charged for the zones it crosses without stopping.</p>
+    <ul>
+      <li><b>Single tickets only.</b> A GA travels free; a Halbtax pays the
+          reduced column. Day passes and season tickets change the picture
+          entirely.</li>
+      <li><b>No time dimension.</b> This says what a place costs, not whether
+          getting there takes 15 minutes or three hours on two buses.</li>
+      <li><b>Boundary stops.</b> Some stops are tariff-valid in two or more
+          zones. Each stop here is assigned exactly one zone, which overprices
+          a few journeys through them.</li>
+      <li><b>Ends at the ZVV boundary.</b> Journeys beyond it need Z-Pass or
+          national fares, which are not modelled.</li>
+      <li><b>Scheduled network.</b> Seasonal and very infrequent services count
+          as connections regardless of whether you could realistically use
+          them.</li>
+      <li><b>Route geometry is approximated.</b> The feed carries no route
+          shapes, so zones crossed between two stops are estimated from the
+          straight line between them.</li>
+      <li>A few lake boat piers, the Polybahn, the Felsenegg cable car and the
+          Meilen–Horgen car ferry appear as separate islands in the timetable
+          data and are not reachable in this model.</li>
+    </ul>
+    <p class="fineprint">Fares are computed from published zone rules, not
+       bought from ZVV. Check the ZVV app before you travel.</p>
+  </details>
+
+  <footer>
+    Fares valid from <span id="valid-from">—</span>.
+    Tarifzonen: Kanton Zürich (OGD) · Basemap © swisstopo ·
+    Timetable: opentransportdata.swiss
+  </footer>
+</aside>
+
+<!-- MapLibre GL JS 4.7.1, BSD-3-Clause. Vendored so the site has no
+     third-party runtime dependency beyond the swisstopo tiles. -->
+<script src="vendor/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

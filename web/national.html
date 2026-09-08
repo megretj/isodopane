@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isodapane — Switzerland by the franc</title>
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="map"></div>
+
+<aside id="panel">
+  <header>
+    <h1>Isodapane <span class="scope">Switzerland</span></h1>
+    <p class="sub">How far a single rail ticket takes you, nationwide.
+       <a href="index.html">Canton of Zürich map →</a></p>
+  </header>
+
+  <section class="origin">
+    <div class="label">Starting from</div>
+    <div id="origin-name">—</div>
+    <div class="meta"><span id="reach-count">—</span> · search <span id="timing">—</span></div>
+    <div class="meta"><span id="repaired">—</span></div>
+    <div class="hint">Click anywhere to move the starting station. Hover to see the
+      fare, the route and how many stops away it is.</div>
+  </section>
+
+  <section class="control">
+    <label for="budget">Budget <output id="budget-value">CHF 40.00</output></label>
+    <input type="range" id="budget" min="0" max="200" step="0.5" value="40">
+    <div class="range-note"><span id="budget-max">max —</span> — the priciest station
+      reachable from here</div>
+  </section>
+
+  <section class="control toggles">
+    <div class="toggle">
+      <span class="label">Class</span>
+      <label><input type="radio" name="klass" value="second" checked> 2nd</label>
+      <label><input type="radio" name="klass" value="first"> 1st</label>
+    </div>
+    <div class="toggle">
+      <span class="label">Fare</span>
+      <label><input type="radio" name="reduction" value="full" checked> Full</label>
+      <label><input type="radio" name="reduction" value="half"> Halbtax</label>
+    </div>
+  </section>
+
+  <section class="legend">
+    <div class="label">Single ticket</div>
+    <div id="legend-items"></div>
+    <div class="tier-key">
+      <span><span class="dot solid"></span> published fare</span>
+      <span><span class="dot faded"></span> estimated</span>
+    </div>
+  </section>
+
+  <details class="caveats">
+    <summary>What this is, and what it isn't</summary>
+    <p>The national tariff charges by <b>tariff kilometres</b>, not zones, so this
+       map is a distance model rather than the zone model used for Zürich.
+       Routing follows the <b>fastest</b> train, not the cheapest detour, and the
+       fare is computed on the line actually taken. Every station is priced one
+       of two ways, and the hover tells you which.</p>
+    <ul>
+      <li><b>Published fare</b> — a real price exists for that station pair in the
+          open fare data, and it is used as-is. 2585 pairs.</li>
+      <li><b>Estimate</b> — no published price, so tariff kilometres are summed
+          along the route and looked up in the fare curve. Measured against
+          held-out real fares: <b>median error 6.7%</b>, nine in ten within 19%.</li>
+      <li><b>A nearer station may cost more than a farther one, and that is not
+          an error.</b> A published fare is a direct relation between two
+          stations, priced for the journey you would actually make between them.
+          From Zürich HB, Liestal is CHF 38.00 while Basel SBB further down the
+          same line is CHF 31.60 — because the fast Basel train runs through
+          Liestal without stopping, so reaching Liestal means a slower line or a
+          longer way round. Both fares are right; forcing them into order would
+          misprice one.</li>
+      <li><b>Switzerland only.</b> Foreign stations are excluded, so a journey is
+          never routed through Italy or Germany even where a real train would.
+          A handful of border lines are cut off as a result.</li>
+      <li><b>Tariff kilometres are not map kilometres.</b> They are fitted per
+          stretch of line from real fares, because surcharges are large and
+          uneven: Wengen–Lauterbrunnen is 1.2 km on the ground and 16 tariff km
+          on the ticket. Lines no published fare covers keep their geographic
+          length and will be <i>underpriced</i> if they carry a surcharge.</li>
+      <li><b>Fare data is from 2023</b> and sits below today's prices. Treat every
+          number as indicative.</li>
+      <li><b>Rail only</b>, and only stations a train calls at. No buses, no
+          postbus, no city networks, no regional fare unions.</li>
+      <li>Single full-fare tickets. No GA, day passes, saver tickets or supplements.
+          Halbtax is taken as half the full fare.</li>
+      <li>No time dimension: this says what a place costs, not how long it takes.</li>
+    </ul>
+    <p class="fineprint">Not a ticket shop, and not fit for selling travel.
+       Check SBB before you buy. <span id="source-note"></span></p>
+  </details>
+
+  <footer>
+    Fares: opentransportdata.swiss (OSDM) · Timetable: opentransportdata.swiss GTFS ·
+    Basemap © swisstopo
+  </footer>
+</aside>
+
+<!-- MapLibre GL JS 4.7.1, BSD-3-Clause. Vendored so the site has no
+     third-party runtime dependency beyond the swisstopo tiles. -->
+<script src="vendor/maplibre-gl.js"></script>
+<script src="national.js"></script>
+</body>
+</html>

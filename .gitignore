@@ -1,0 +1,7 @@
+/target
+/data/raw/
+
+# Build artefacts only ever land here by running the CLI from inside web/;
+# they are not part of the published site.
+/web/data/raw/
+/web/data/national/

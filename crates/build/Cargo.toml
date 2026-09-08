@@ -1,0 +1,23 @@
+[package]
+name = "isodapane-build"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+csv = "1.4.0"
+geo = "0.31"
+geo-types = "0.7"
+geojson = "0.24"
+gtfs-structures = { version = "0.47", default-features = false }
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "rustls-tls"] }
+rstar = "0.12"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+toml = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+zip = "8.6.0"
